@@ -1,15 +1,168 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>我的个人主页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的导航主页</title>
     <style>
-        body { font-family: sans-serif; text-align: center; padding: 50px; }
-        h1 { color: #333; }
+        :root {
+            --bg-color: #1a1a1a;
+            --card-bg: #2d2d2d;
+            --text-color: #e0e0e0;
+            --accent-color: #4CAF50;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        /* 时钟样式 */
+        #clock {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+
+        /* 搜索框样式 */
+        .search-container {
+            margin-bottom: 40px;
+        }
+        
+        input[type="text"] {
+            padding: 12px 20px;
+            width: 300px;
+            border-radius: 25px;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            background: var(--card-bg);
+            color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        input[type="text"]:focus {
+            width: 400px;
+            box-shadow: 0 0 10px var(--accent-color);
+        }
+
+        /* 链接卡片容器 */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3列布局 */
+            gap: 20px;
+            width: 80%;
+            max-width: 800px;
+        }
+
+        /* 单个分类卡片 */
+        .category-card {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+
+        .category-title {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: var(--accent-color);
+            border-bottom: 1px solid #444;
+            padding-bottom: 5px;
+        }
+
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .links a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+        }
+
+        .links a:hover {
+            color: var(--accent-color);
+            transform: translateX(5px);
+        }
+
+        .icon { margin-right: 8px; }
+
+        /* 手机端适配 */
+        @media (max-width: 600px) {
+            .grid-container { grid-template-columns: 1fr; }
+            input[type="text"]:focus { width: 300px; }
+        }
     </style>
 </head>
 <body>
-    <h1>欢迎来到我的网站！</h1>
-    <p>这是我利用 GitHub Pages 创建的第一个免费网站。</p>
+
+    <div id="clock">00:00</div>
+
+    <div class="search-container">
+        <form action="https://www.baidu.com/s" method="get" target="_blank">
+            <input type="text" name="wd" placeholder="Search..." autocomplete="off" autofocus>
+        </form>
+    </div>
+
+    <div class="grid-container">
+        
+        <div class="category-card">
+            <div class="category-title">🔥 常用</div>
+            <div class="links">
+                <a href="https://github.com"><span class="icon">🐙</span>GitHub</a>
+                <a href="https://www.bilibili.com"><span class="icon">📺</span>Bilibili</a>
+                <a href="https://mail.google.com"><span class="icon">📧</span>Gmail</a>
+                <a href="https://chatgpt.com"><span class="icon">🤖</span>ChatGPT</a>
+            </div>
+        </div>
+
+        <div class="category-card">
+            <div class="category-title">📚 研习</div>
+            <div class="links">
+                <a href="https://scholar.google.com"><span class="icon">🎓</span>Google Scholar</a>
+                <a href="https://arxiv.org"><span class="icon">📄</span>Arxiv</a>
+                <a href="https://stackoverflow.com"><span class="icon">🐛</span>StackOverflow</a>
+                <a href="https://fanyi.deepl.com"><span class="icon">📝</span>DeepL 翻译</a>
+            </div>
+        </div>
+
+        <div class="category-card">
+            <div class="category-title">☕️ 摸鱼</div>
+            <div class="links">
+                <a href="https://www.zhihu.com"><span class="icon">📖</span>知乎</a>
+                <a href="https://www.v2ex.com"><span class="icon">⚡️</span>V2EX</a>
+                <a href="https://youtube.com"><span class="icon">🟥</span>YouTube</a>
+                <a href="https://twitter.com"><span class="icon">🐦</span>Twitter/X</a>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // 简单的时钟逻辑
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            document.getElementById('clock').textContent = `${hours}:${minutes}`;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
 </body>
 </html>
